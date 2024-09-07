@@ -29,7 +29,6 @@ type
     btnFechar: TBitBtn;
     dtsListagem: TDataSource;
     qryListagem: TFDQuery;
-    Label1: TLabel;
     lblIndice: TLabel;
     procedure btnFecharClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -44,10 +43,15 @@ type
       Shift: TShiftState);
     procedure btnGravarClick(Sender: TObject);
     procedure btnApagarClick(Sender: TObject);
+    procedure grdListagemDblClick(Sender: TObject);
   private
     { Private declarations }
     estado: TEstadoCadastro;
     procedure ControleButtons;
+    procedure TrocarAba;
+    procedure DesabilitarEditPK;
+    function ExisteCampoObrigatorio: boolean;
+    procedure LimparEdits;
   public
     { Public declarations }
     IndiceAtual: string;
@@ -81,6 +85,7 @@ begin
     qryListagem.Open;
   end;
 
+  DesabilitarEditPK;
 end;
 
 function TfrmTelaHeranca.Gravar(estado: TEstadoCadastro): boolean;
@@ -93,9 +98,68 @@ begin
   Result := True;
 end;
 
+
+function TfrmTelaHeranca.ExisteCampoObrigatorio: boolean;
+var i: integer;
+begin
+  Result := false;
+  for i := 0 to ComponentCount - 1 do
+  begin
+      if not(Components[i] is TLabeledEdit) then
+      begin
+        Continue;
+      end;
+      if (TLabeledEdit(Components[i]).Tag = 2) AND (TLabeledEdit(Components[i]).Text = EmptyStr) then
+      begin
+        MessageDlg(TLabeledEdit(Components[i]).EditLabel.Caption + ' é um campo obrigatório!', TMsgDlgType.mtInformation, [mbOk], 0);
+        TLabeledEdit(Components[i]).SetFocus;
+        Result := True;
+        Break;
+      end;
+  end;
+
+end;
+
+
+procedure TfrmTelaHeranca.DesabilitarEditPK;
+var i: integer;
+begin
+  for i := 0 to ComponentCount - 1 do
+  begin
+      if not(Components[i] is TLabeledEdit) then
+      begin
+        Continue;
+      end;
+      if (TLabeledEdit(Components[i]).Tag = 1) then
+      begin
+        TLabeledEdit(Components[i]).Enabled := false;
+        Break;
+      end;
+  end;
+end;
+
+
+procedure TfrmTelaHeranca.LimparEdits;
+var i: integer;
+begin
+  for i := 0 to ComponentCount - 1 do
+  begin
+      if (Components[i] is TLabeledEdit) then
+      begin
+          TLabeledEdit(Components[i]).Text := EmptyStr;
+      end;
+  end;
+end;
+
+
 function TfrmTelaHeranca.Excluir: boolean;
 begin
   Result := True;
+end;
+
+procedure TfrmTelaHeranca.grdListagemDblClick(Sender: TObject);
+begin
+  btnAlterar.Click;
 end;
 
 procedure TfrmTelaHeranca.grdListagemKeyDown(Sender: TObject; var Key: Word;
@@ -120,32 +184,36 @@ procedure TfrmTelaHeranca.btnAlterarClick(Sender: TObject);
 begin
   estado := ecAlterar;
   ControleButtons;
-  pgcPrincipal.ActivePageIndex := 1;
+  TrocarAba;
 end;
 
 procedure TfrmTelaHeranca.btnApagarClick(Sender: TObject);
 begin
-  if Excluir then
-    ShowMessage('Excluir');
+  LimparEdits;
 end;
 
 procedure TfrmTelaHeranca.btnCancelarClick(Sender: TObject);
 begin
   estado := ecNenhum;
   ControleButtons;
-  pgcPrincipal.ActivePageIndex := 0;
+  LimparEdits;
+  TrocarAba;
 end;
 
 procedure TfrmTelaHeranca.btnFecharClick(Sender: TObject);
 begin
+  LimparEdits;
   Close;
 end;
 
 
 procedure TfrmTelaHeranca.btnGravarClick(Sender: TObject);
 begin
-  Gravar(estado);
+  if ExisteCampoObrigatorio then
+    Abort;
 
+  Gravar(estado);
+  estado := ecNenhum;
 end;
 
 procedure TfrmTelaHeranca.ControleButtons;
@@ -163,7 +231,8 @@ procedure TfrmTelaHeranca.btnNovoClick(Sender: TObject);
 begin
   estado := ecInserir;
   ControleButtons;
-  pgcPrincipal.ActivePageIndex := 1;
+  LimparEdits;
+  TrocarAba;
 end;
 
 
@@ -171,6 +240,18 @@ procedure TfrmTelaHeranca.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   qryListagem.Close;
   Close;
+end;
+
+
+procedure TfrmTelaHeranca.TrocarAba;
+begin
+  if (estado = ecInserir) OR (estado = ecAlterar) then
+  begin
+     pgcPrincipal.ActivePageIndex := 1;
+     Abort;
+  end;
+  pgcPrincipal.ActivePageIndex := 0;
+
 end;
 
 end.

@@ -2,6 +2,7 @@ inherited frmCadCategoria: TfrmCadCategoria
   Caption = 'Cadastro categoria'
   TextHeight = 15
   inherited pgcPrincipal: TPageControl
+    ActivePage = tabManutencao
     inherited tabListagem: TTabSheet
       inherited grdListagem: TDBGrid
         Columns = <
@@ -15,6 +16,49 @@ inherited frmCadCategoria: TfrmCadCategoria
             FieldName = 'DESCRICAO'
             Visible = True
           end>
+      end
+    end
+    inherited tabManutencao: TTabSheet
+      object lblTitle: TLabel
+        Left = 24
+        Top = 16
+        Width = 108
+        Height = 20
+        Caption = 'MANUTEN'#199#195'O'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'Segoe UI'
+        Font.Style = [fsBold, fsUnderline]
+        ParentFont = False
+      end
+      object edtCodigo: TLabeledEdit
+        Tag = 1
+        Left = 24
+        Top = 80
+        Width = 121
+        Height = 23
+        EditLabel.Width = 39
+        EditLabel.Height = 15
+        EditLabel.Caption = 'C'#243'digo'
+        MaxLength = 10
+        NumbersOnly = True
+        TabOrder = 0
+        Text = ''
+      end
+      object edtDescricao: TLabeledEdit
+        Tag = 2
+        Left = 24
+        Top = 136
+        Width = 397
+        Height = 23
+        EditLabel.Width = 51
+        EditLabel.Height = 15
+        EditLabel.Caption = 'Descri'#231#227'o'
+        MaxLength = 59
+        NumbersOnly = True
+        TabOrder = 1
+        Text = ''
       end
     end
   end

@@ -15,6 +15,9 @@ type
   TfrmCadCategoria = class(TfrmTelaHeranca)
     qryListagemCATEGORIAID: TIntegerField;
     qryListagemDESCRICAO: TStringField;
+    lblTitle: TLabel;
+    edtCodigo: TLabeledEdit;
+    edtDescricao: TLabeledEdit;
     procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
