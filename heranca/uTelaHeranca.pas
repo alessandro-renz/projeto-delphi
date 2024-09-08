@@ -46,7 +46,7 @@ type
     procedure grdListagemDblClick(Sender: TObject);
   private
     { Private declarations }
-    estado: TEstadoCadastro;
+
     procedure ControleButtons;
     procedure TrocarAba;
     procedure DesabilitarEditPK;
@@ -54,8 +54,9 @@ type
     procedure LimparEdits;
   public
     { Public declarations }
+    Estado: TEstadoCadastro;
     IndiceAtual: string;
-    function Excluir: boolean; Virtual;
+    function Apagar: boolean; Virtual;
     function Gravar(estado: TEstadoCadastro): boolean; Virtual;
   end;
 
@@ -69,7 +70,7 @@ implementation
 
 procedure TfrmTelaHeranca.FormCreate(Sender: TObject);
 begin
-  estado := ecNenhum;
+  Estado := ecNenhum;
   grdListagem.Options := [dgTitles,dgIndicator,dgColumnResize,dgColLines,
                             dgRowLines,dgTabs,dgRowSelect,dgAlwaysShowSelection,
                             dgCancelOnExit,dgTitleClick,dgTitleHotTrack];
@@ -152,7 +153,7 @@ begin
 end;
 
 
-function TfrmTelaHeranca.Excluir: boolean;
+function TfrmTelaHeranca.Apagar: boolean;
 begin
   Result := True;
 end;
@@ -182,7 +183,7 @@ end;
 
 procedure TfrmTelaHeranca.btnAlterarClick(Sender: TObject);
 begin
-  estado := ecAlterar;
+  Estado := ecAlterar;
   ControleButtons;
   TrocarAba;
 end;
@@ -190,11 +191,13 @@ end;
 procedure TfrmTelaHeranca.btnApagarClick(Sender: TObject);
 begin
   LimparEdits;
+  qryListagem.Refresh;
+  grdListagem.Refresh;
 end;
 
 procedure TfrmTelaHeranca.btnCancelarClick(Sender: TObject);
 begin
-  estado := ecNenhum;
+  Estado := ecNenhum;
   ControleButtons;
   LimparEdits;
   TrocarAba;
@@ -212,24 +215,28 @@ begin
   if ExisteCampoObrigatorio then
     Abort;
 
-  Gravar(estado);
-  estado := ecNenhum;
+  Gravar(Estado);
+  qryListagem.Refresh;
+  grdListagem.Refresh;
+  Estado := ecNenhum;
+  ControleButtons;
+  TrocarAba;
 end;
 
 procedure TfrmTelaHeranca.ControleButtons;
 begin
-  btnNovo.Enabled := (estado = ecNenhum);
-  btnAlterar.Enabled := (estado = ecNenhum);
-  btnCancelar.Enabled := (estado <> ecNenhum);
-  btnGravar.Enabled := (estado <> ecNenhum);
-  btnApagar.Enabled := (estado = ecNenhum);
-  btnNavigator.Enabled := (estado = ecNenhum);
+  btnNovo.Enabled := (Estado = ecNenhum);
+  btnAlterar.Enabled := (Estado = ecNenhum);
+  btnCancelar.Enabled := (Estado <> ecNenhum);
+  btnGravar.Enabled := (Estado <> ecNenhum);
+  btnApagar.Enabled := (Estado = ecNenhum);
+  btnNavigator.Enabled := (Estado = ecNenhum);
 end;
 
 
 procedure TfrmTelaHeranca.btnNovoClick(Sender: TObject);
 begin
-  estado := ecInserir;
+  Estado := ecInserir;
   ControleButtons;
   LimparEdits;
   TrocarAba;
@@ -245,7 +252,7 @@ end;
 
 procedure TfrmTelaHeranca.TrocarAba;
 begin
-  if (estado = ecInserir) OR (estado = ecAlterar) then
+  if (Estado = ecInserir) OR (Estado = ecAlterar) then
   begin
      pgcPrincipal.ActivePageIndex := 1;
      Abort;

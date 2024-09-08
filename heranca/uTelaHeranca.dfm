@@ -39,6 +39,7 @@ object frmTelaHeranca: TfrmTelaHeranca
         Margins.Bottom = 0
         Align = alTop
         TabOrder = 0
+        ExplicitWidth = 939
         object lblIndice: TLabel
           Left = 10
           Top = 3
@@ -321,7 +322,7 @@ object frmTelaHeranca: TfrmTelaHeranca
       TabOrder = 5
     end
     object btnFechar: TBitBtn
-      Left = 859
+      Left = 847
       Top = 8
       Width = 80
       Height = 28
@@ -356,7 +357,7 @@ object frmTelaHeranca: TfrmTelaHeranca
         B3B3B4B3B3BDBCBCC2C1C1FF00FFFF00FFFF00FFFF00FFFF00FF}
       TabOrder = 6
       OnClick = btnFecharClick
-      ExplicitLeft = 855
+      ExplicitLeft = 843
     end
   end
   object dtsListagem: TDataSource

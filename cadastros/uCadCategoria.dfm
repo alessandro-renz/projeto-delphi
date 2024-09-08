@@ -1,8 +1,8 @@
 inherited frmCadCategoria: TfrmCadCategoria
   Caption = 'Cadastro categoria'
+  OnDestroy = FormDestroy
   TextHeight = 15
   inherited pgcPrincipal: TPageControl
-    ActivePage = tabManutencao
     inherited tabListagem: TTabSheet
       inherited grdListagem: TDBGrid
         Columns = <
@@ -56,7 +56,6 @@ inherited frmCadCategoria: TfrmCadCategoria
         EditLabel.Height = 15
         EditLabel.Caption = 'Descri'#231#227'o'
         MaxLength = 59
-        NumbersOnly = True
         TabOrder = 1
         Text = ''
       end
@@ -65,6 +64,10 @@ inherited frmCadCategoria: TfrmCadCategoria
   inherited pnlRodape: TPanel
     inherited btnNavigator: TDBNavigator
       Hints.Strings = ()
+    end
+    inherited btnFechar: TBitBtn
+      Left = 843
+      ExplicitLeft = 839
     end
   end
   inherited qryListagem: TFDQuery

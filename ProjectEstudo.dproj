@@ -118,6 +118,7 @@
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="uEnum.pas"/>
+        <DCCReference Include="classes\cCategoria.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
