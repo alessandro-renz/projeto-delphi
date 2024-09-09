@@ -74,8 +74,7 @@ procedure TfrmCadCategoria.btnApagarClick(Sender: TObject);
 begin
   if oCategoria.Selecionar(qryListagemCATEGORIAID.AsInteger) then
   begin
-    oCategoria.Apagar(qryListagemCATEGORIAID.AsInteger);
-    ShowMessage('Registro removido com sucesso');
+    oCategoria.Apagar;
   end
   else
   begin
@@ -84,6 +83,7 @@ begin
 
   inherited;
 end;
+
 
 function TfrmCadCategoria.Gravar(estado: TEstadoCadastro): boolean;
 begin

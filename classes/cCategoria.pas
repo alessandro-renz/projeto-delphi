@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes,
   FireDAC.Comp.Client, FireDAC.Stan.Intf, FireDAC.Stan.Option,
   FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
-  FireDAC.Stan.Param, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet;
+  FireDAC.Stan.Param, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet, Vcl.Dialogs, Vcl.Controls;
 
 Type
   TCategoria = class
@@ -21,7 +21,7 @@ Type
       procedure SetDescricao(const Value: String);
     public
       function Inserir: boolean;
-      function Apagar(id: integer): boolean;
+      function Apagar: boolean;
       function Atualizar: boolean;
       function Selecionar(id: integer): boolean;
       constructor Create(conexaoDB: TFDConnection);
@@ -105,11 +105,23 @@ begin
 end;
 
 
-function TCategoria.Apagar(id: integer): boolean;
+function TCategoria.Apagar: boolean;
 var
   query: TFDQuery;
   sqlText: String;
+  msgConfirmation: TModalResult;
 begin
+  msgConfirmation := MessageDlg('Tem certeza que deseja remover o registro:' +#13+#13+
+                'Código: '+IntToStr(Self.FCategoriaId)+#13+
+                'Descrição: '+Self.FDescricao, 
+                mtConfirmation, [mbYes, mbNo], mrNo);
+
+  if msgConfirmation = mrNo then
+  begin
+    Result := False;
+    Abort;
+  end;
+  
   Result := True;
   try
     sqlText := 'DELETE FROM CATEGORIAS WHERE CATEGORIAID=:categoriaId;';
@@ -117,7 +129,7 @@ begin
     query.Connection := conexao;
     query.SQL.Clear;
     query.SQL.Add(sqlText);
-    query.ParamByName('categoriaId').AsInteger := id;
+    query.ParamByName('categoriaId').AsInteger := Self.FCategoriaId;
     try
       query.ExecSql;
     Except

@@ -24,6 +24,7 @@ object frmTelaHeranca: TfrmTelaHeranca
     ActivePage = tabListagem
     Align = alClient
     TabOrder = 0
+    OnChange = pgcPrincipalChange
     ExplicitWidth = 947
     ExplicitHeight = 463
     object tabListagem: TTabSheet
@@ -322,7 +323,7 @@ object frmTelaHeranca: TfrmTelaHeranca
       TabOrder = 5
     end
     object btnFechar: TBitBtn
-      Left = 847
+      Left = 843
       Top = 8
       Width = 80
       Height = 28
@@ -357,7 +358,7 @@ object frmTelaHeranca: TfrmTelaHeranca
         B3B3B4B3B3BDBCBCC2C1C1FF00FFFF00FFFF00FFFF00FFFF00FF}
       TabOrder = 6
       OnClick = btnFecharClick
-      ExplicitLeft = 843
+      ExplicitLeft = 839
     end
   end
   object dtsListagem: TDataSource

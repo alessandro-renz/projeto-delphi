@@ -44,6 +44,7 @@ type
     procedure btnGravarClick(Sender: TObject);
     procedure btnApagarClick(Sender: TObject);
     procedure grdListagemDblClick(Sender: TObject);
+    procedure pgcPrincipalChange(Sender: TObject);
   private
     { Private declarations }
 
@@ -66,7 +67,6 @@ var
 implementation
 
 {$R *.dfm}
-
 
 procedure TfrmTelaHeranca.FormCreate(Sender: TObject);
 begin
@@ -179,6 +179,12 @@ end;
 procedure TfrmTelaHeranca.mskEditChange(Sender: TObject);
 begin
   qryListagem.Locate(IndiceAtual, TMaskEdit(Sender).Text, [loPartialKey]);
+end;
+
+procedure TfrmTelaHeranca.pgcPrincipalChange(Sender: TObject);
+begin
+  if Estado = ecNenhum then
+    pgcPrincipal.ActivePageIndex := 0;
 end;
 
 procedure TfrmTelaHeranca.btnAlterarClick(Sender: TObject);

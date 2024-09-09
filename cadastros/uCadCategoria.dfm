@@ -66,8 +66,7 @@ inherited frmCadCategoria: TfrmCadCategoria
       Hints.Strings = ()
     end
     inherited btnFechar: TBitBtn
-      Left = 843
-      ExplicitLeft = 839
+      ExplicitLeft = 843
     end
   end
   inherited qryListagem: TFDQuery
