@@ -3,6 +3,7 @@ inherited frmCadCategoria: TfrmCadCategoria
   OnDestroy = FormDestroy
   TextHeight = 15
   inherited pgcPrincipal: TPageControl
+    ActivePage = tabManutencao
     inherited tabListagem: TTabSheet
       inherited grdListagem: TDBGrid
         Columns = <
@@ -66,7 +67,8 @@ inherited frmCadCategoria: TfrmCadCategoria
       Hints.Strings = ()
     end
     inherited btnFechar: TBitBtn
-      ExplicitLeft = 843
+      Left = 823
+      ExplicitLeft = 819
     end
   end
   inherited qryListagem: TFDQuery

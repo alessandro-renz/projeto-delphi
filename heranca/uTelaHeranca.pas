@@ -70,6 +70,7 @@ implementation
 
 procedure TfrmTelaHeranca.FormCreate(Sender: TObject);
 begin
+  pgcPrincipal.ActivePageIndex := 0;
   Estado := ecNenhum;
   grdListagem.Options := [dgTitles,dgIndicator,dgColumnResize,dgColLines,
                             dgRowLines,dgTabs,dgRowSelect,dgAlwaysShowSelection,
@@ -99,7 +100,10 @@ begin
   Result := True;
 end;
 
-
+{
+  Tag 1: É o campo primario
+  Tag 2: Significa que o campo é obrigatório
+}
 function TfrmTelaHeranca.ExisteCampoObrigatorio: boolean;
 var i: integer;
 begin

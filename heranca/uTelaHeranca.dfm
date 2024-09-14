@@ -3,8 +3,8 @@ object frmTelaHeranca: TfrmTelaHeranca
   Top = 0
   BorderStyle = bsDialog
   Caption = 'Tela Heran'#231'a'
-  ClientHeight = 505
-  ClientWidth = 951
+  ClientHeight = 503
+  ClientWidth = 943
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -19,8 +19,8 @@ object frmTelaHeranca: TfrmTelaHeranca
   object pgcPrincipal: TPageControl
     Left = 0
     Top = 0
-    Width = 951
-    Height = 464
+    Width = 943
+    Height = 462
     ActivePage = tabListagem
     Align = alClient
     TabOrder = 0
@@ -121,15 +121,15 @@ object frmTelaHeranca: TfrmTelaHeranca
   end
   object pnlRodape: TPanel
     Left = 0
-    Top = 464
-    Width = 951
+    Top = 462
+    Width = 943
     Height = 41
     Align = alBottom
     TabOrder = 1
     ExplicitTop = 463
     ExplicitWidth = 947
     DesignSize = (
-      951
+      943
       41)
     object btnNovo: TBitBtn
       Left = 2
@@ -323,7 +323,7 @@ object frmTelaHeranca: TfrmTelaHeranca
       TabOrder = 5
     end
     object btnFechar: TBitBtn
-      Left = 843
+      Left = 827
       Top = 8
       Width = 80
       Height = 28

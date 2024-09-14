@@ -8,7 +8,8 @@ uses
   uCadCategoria in 'cadastros\uCadCategoria.pas' {frmCadCategoria},
   uEnum in 'uEnum.pas',
   cCategoria in 'classes\cCategoria.pas',
-  uCadCliente in 'cadastros\uCadCliente.pas' {frmCadCliente};
+  uCadCliente in 'cadastros\uCadCliente.pas' {frmCadCliente},
+  cCliente in 'classes\cCliente.pas';
 
 {$R *.res}
 

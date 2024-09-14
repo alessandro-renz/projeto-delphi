@@ -4,7 +4,7 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Menus, uDtmConexao, uCadCategoria, uCadCliente,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Menus, uDtmConexao, uCadCategoria, uCadCliente, uCadProduto,
   Vcl.StdCtrls, Vcl.Mask, RxToolEdit;
 
 type
@@ -28,6 +28,7 @@ type
     procedure FECHAR1Click(Sender: TObject);
     procedure CATEGORIA1Click(Sender: TObject);
     procedure CLIENTE1Click(Sender: TObject);
+    procedure PRODUTO1Click(Sender: TObject);
 
   private
     { Private declarations }
@@ -60,6 +61,14 @@ procedure TfrmPrincipal.FECHAR1Click(Sender: TObject);
 begin
   //Close;
   Application.Terminate;
+end;
+
+
+procedure TfrmPrincipal.PRODUTO1Click(Sender: TObject);
+begin
+  frmCadProduto := TfrmCadProduto.create(self);
+  frmCadProduto.ShowModal;
+  frmCadProduto.Release;
 end;
 
 end.
