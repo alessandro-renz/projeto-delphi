@@ -8,7 +8,7 @@ uses
   Vcl.StdCtrls, Vcl.Buttons, Vcl.Mask, Data.DB, Vcl.DBCtrls, Vcl.Grids,
   Vcl.DBGrids, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
   FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
-  FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Comp.Client, uDtmConexao, uEnum;
+  FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Comp.Client, uDtmConexao, uEnum, RxCurrEdit;
 
 type
   TfrmTelaHeranca = class(TForm)
@@ -83,7 +83,6 @@ begin
   begin
     IndiceAtual := lowerCase(IndiceAtual);
     lblIndice.Caption := qryListagem.FieldByName(IndiceAtual).DisplayLabel;
-    qryListagem.IndexFieldNames := IndiceAtual;
     qryListagem.Open;
   end;
 
@@ -152,6 +151,10 @@ begin
       if (Components[i] is TLabeledEdit) then
       begin
           TLabeledEdit(Components[i]).Text := EmptyStr;
+      end;
+      if (Components[i] is TCurrencyEdit) then
+      begin
+          TCurrencyEdit(Components[i]).Value := 0;
       end;
   end;
 end;
@@ -231,6 +234,7 @@ begin
   Estado := ecNenhum;
   ControleButtons;
   TrocarAba;
+  LimparEdits;
 end;
 
 procedure TfrmTelaHeranca.ControleButtons;

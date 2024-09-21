@@ -25,14 +25,14 @@ object frmTelaHeranca: TfrmTelaHeranca
     Align = alClient
     TabOrder = 0
     OnChange = pgcPrincipalChange
-    ExplicitWidth = 947
-    ExplicitHeight = 463
+    ExplicitWidth = 939
+    ExplicitHeight = 461
     object tabListagem: TTabSheet
       Caption = 'Listagem'
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 943
+        Width = 935
         Height = 65
         Margins.Left = 0
         Margins.Top = 0
@@ -40,7 +40,7 @@ object frmTelaHeranca: TfrmTelaHeranca
         Margins.Bottom = 0
         Align = alTop
         TabOrder = 0
-        ExplicitWidth = 939
+        ExplicitWidth = 931
         object lblIndice: TLabel
           Left = 10
           Top = 3
@@ -98,8 +98,8 @@ object frmTelaHeranca: TfrmTelaHeranca
       object grdListagem: TDBGrid
         Left = 0
         Top = 65
-        Width = 943
-        Height = 369
+        Width = 935
+        Height = 367
         Align = alClient
         DataSource = dtsListagem
         Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
@@ -126,8 +126,8 @@ object frmTelaHeranca: TfrmTelaHeranca
     Height = 41
     Align = alBottom
     TabOrder = 1
-    ExplicitTop = 463
-    ExplicitWidth = 947
+    ExplicitTop = 461
+    ExplicitWidth = 939
     DesignSize = (
       943
       41)
@@ -323,7 +323,7 @@ object frmTelaHeranca: TfrmTelaHeranca
       TabOrder = 5
     end
     object btnFechar: TBitBtn
-      Left = 827
+      Left = 823
       Top = 8
       Width = 80
       Height = 28
@@ -358,7 +358,7 @@ object frmTelaHeranca: TfrmTelaHeranca
         B3B3B4B3B3BDBCBCC2C1C1FF00FFFF00FFFF00FFFF00FFFF00FF}
       TabOrder = 6
       OnClick = btnFecharClick
-      ExplicitLeft = 839
+      ExplicitLeft = 819
     end
   end
   object dtsListagem: TDataSource

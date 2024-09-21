@@ -1,7 +1,7 @@
 unit cProduto;
 
 interface
-  uses
+uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes,
   FireDAC.Comp.Client, FireDAC.Stan.Intf, FireDAC.Stan.Option,
   FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
@@ -14,10 +14,10 @@ Type
         FNome: string;
         FDescricao: string;
         FValor: double;
-        FQuantidade: double;
         FCategoriaId: integer;
         Query: TFDQuery;
         Conexao: TFDConnection;
+        FLastId: integer;
     public
         constructor Create(conexaoDB: TFDConnection);
         destructor Destroy;
@@ -30,8 +30,8 @@ Type
       property Nome:string read FNome write FNome;
       property Descricao:string read FDescricao write FDescricao;
       property Valor:double read FValor write FValor;
-      property Quantidade:double read FQuantidade write FQuantidade;
       property CategoriaId:integer read FCategoriaId write FCategoriaId;
+      property LastId: integer read FLastId;
   end;
 
 implementation
@@ -51,22 +51,25 @@ implementation
 
   function TProduto.Inserir: boolean;
   begin
-    Query.SQL.Add('insert into produtos (NOME, DESCRICAO, VALOR, QUANTIDADE, CATEGORIAID) '+
-                  ' values(:nome, :descricao, :valor, :quantidade, :categoriaid)');
+    Query.SQL.Add('insert into produtos (NOME, DESCRICAO, VALOR, CATEGORIAID) '+
+                  ' values(:nome, :descricao, :valor, :categoriaid) RETURNING PRODUTOID;');
     Query.ParamByName('nome').AsString := FNome;
     Query.ParamByName('descricao').AsString := FDescricao;
     Query.ParamByName('valor').AsFloat := FValor;
-    Query.ParamByName('quantidade').AsFloat := FQuantidade;
     Query.ParamByName('categoriaid').AsInteger := FCategoriaId;
 
     try
-      Query.ExecSQL;
+      Query.Open;
+      FLastId := Query.FieldByName('PRODUTOID').AsInteger;
+      Result := True;
     except
-      Result := false;
+      FLastId := 0;
+      Result := False;
+      Query.Close;
       FreeAndNil(Query);
       Exit;
     end;
-    Result := True;
+
   end;
 
   function TProduto.Remover: boolean;

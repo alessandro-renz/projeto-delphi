@@ -1,22 +1,13 @@
 inherited frmCadProduto: TfrmCadProduto
   Caption = 'Cadastro de produtos'
-  ClientHeight = 503
-  ClientWidth = 943
   OnDestroy = FormDestroy
   TextHeight = 15
   inherited pgcPrincipal: TPageControl
-    Width = 943
-    Height = 462
-    ActivePage = tabManutencao
     inherited tabListagem: TTabSheet
-      ExplicitWidth = 935
-      ExplicitHeight = 432
       inherited Panel1: TPanel
-        Width = 935
+        ExplicitWidth = 935
       end
       inherited grdListagem: TDBGrid
-        Width = 935
-        Height = 367
         Columns = <
           item
             Expanded = False
@@ -38,12 +29,6 @@ inherited frmCadProduto: TfrmCadProduto
           end
           item
             Expanded = False
-            FieldName = 'QUANTIDADE'
-            Width = 100
-            Visible = True
-          end
-          item
-            Expanded = False
             FieldName = 'CATEGORIA'
             Width = 150
             Visible = True
@@ -51,8 +36,6 @@ inherited frmCadProduto: TfrmCadProduto
       end
     end
     inherited tabManutencao: TTabSheet
-      ExplicitWidth = 935
-      ExplicitHeight = 432
       object Label1: TLabel
         Left = 24
         Top = 269
@@ -61,18 +44,11 @@ inherited frmCadProduto: TfrmCadProduto
         Caption = 'Valor'
       end
       object Label2: TLabel
-        Left = 352
+        Left = 176
         Top = 269
         Width = 51
         Height = 15
         Caption = 'Categoria'
-      end
-      object Label3: TLabel
-        Left = 192
-        Top = 269
-        Width = 62
-        Height = 15
-        Caption = 'Quantidade'
       end
       object Label4: TLabel
         Left = 24
@@ -116,21 +92,13 @@ inherited frmCadProduto: TfrmCadProduto
         TabOrder = 3
       end
       object lkpCategoria: TDBLookupComboBox
-        Left = 352
+        Left = 176
         Top = 288
-        Width = 265
+        Width = 441
         Height = 23
         KeyField = 'CATEGORIAID'
         ListField = 'DESCRICAO'
         ListSource = dtsCategoria
-        TabOrder = 5
-      end
-      object edtQuantidade: TCurrencyEdit
-        Left = 192
-        Top = 288
-        Width = 121
-        Height = 23
-        DisplayFormat = '0.00;-0.00'
         TabOrder = 4
       end
       object edtDescricao: TMemo
@@ -141,10 +109,64 @@ inherited frmCadProduto: TfrmCadProduto
         TabOrder = 2
       end
     end
+    object tabEstoque: TTabSheet
+      Caption = 'tabEstoque'
+      ImageIndex = 2
+      object Label3: TLabel
+        Left = 24
+        Top = 16
+        Width = 71
+        Height = 21
+        Caption = 'ESTOQUE'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Segoe UI'
+        Font.Style = [fsBold, fsUnderline]
+        ParentFont = False
+      end
+      object Label6: TLabel
+        Left = 24
+        Top = 54
+        Width = 116
+        Height = 15
+        Caption = 'Adicionar Quantidade'
+      end
+      object Label7: TLabel
+        Left = 24
+        Top = 118
+        Width = 111
+        Height = 15
+        Caption = '*Quantidade M'#237'nima'
+      end
+      object Label8: TLabel
+        Left = 24
+        Top = 400
+        Width = 459
+        Height = 15
+        Caption = 
+          '*o n'#250'mero da quantidade m'#237'nima '#233' para o sistema exibir mensagens' +
+          ' de estoque baixo!'
+      end
+      object edtQuantidade: TCurrencyEdit
+        Left = 24
+        Top = 72
+        Width = 121
+        Height = 23
+        DisplayFormat = '0.00'
+        TabOrder = 0
+      end
+      object edtQuantidadeMinima: TCurrencyEdit
+        Left = 24
+        Top = 136
+        Width = 121
+        Height = 23
+        DisplayFormat = '0.00'
+        TabOrder = 1
+      end
+    end
   end
   inherited pnlRodape: TPanel
-    Top = 462
-    Width = 943
     DesignSize = (
       943
       41)
@@ -152,17 +174,22 @@ inherited frmCadProduto: TfrmCadProduto
       Hints.Strings = ()
     end
     inherited btnFechar: TBitBtn
-      Left = 827
+      Left = 819
+      ExplicitLeft = 815
     end
+  end
+  inherited dtsListagem: TDataSource
+    Left = 812
   end
   inherited qryListagem: TFDQuery
     SQL.Strings = (
       
-        'Select p.PRODUTOID, p.NOME, p.DESCRICAO, p.VALOR, p.QUANTIDADE, ' +
-        'c.descricao as categoria'
+        'Select p.PRODUTOID, p.NOME, p.DESCRICAO, p.VALOR, c.descricao as' +
+        ' categoria'
       '    from produtos as p'
       '    LEFT JOIN CATEGORIAS AS C ON C.categoriaid = p.categoriaid'
       '')
+    Left = 884
     object qryListagemPRODUTOID: TIntegerField
       DisplayLabel = 'CODIGO'
       FieldName = 'PRODUTOID'
@@ -189,12 +216,6 @@ inherited frmCadProduto: TfrmCadProduto
       Precision = 18
       Size = 5
     end
-    object qryListagemQUANTIDADE: TFMTBCDField
-      FieldName = 'QUANTIDADE'
-      Origin = 'QUANTIDADE'
-      Precision = 18
-      Size = 5
-    end
     object qryListagemCATEGORIA: TStringField
       AutoGenerateValue = arDefault
       FieldName = 'CATEGORIA'
@@ -209,8 +230,8 @@ inherited frmCadProduto: TfrmCadProduto
     Connection = dtmConexao.FDConnection
     SQL.Strings = (
       'SELECT CATEGORIAID, DESCRICAO FROM CATEGORIAS')
-    Left = 732
-    Top = 242
+    Left = 884
+    Top = 98
     object qryCategoriaCATEGORIAID: TIntegerField
       FieldName = 'CATEGORIAID'
       Origin = 'CATEGORIAID'
@@ -226,7 +247,7 @@ inherited frmCadProduto: TfrmCadProduto
   end
   object dtsCategoria: TDataSource
     DataSet = qryCategoria
-    Left = 660
-    Top = 242
+    Left = 812
+    Top = 98
   end
 end

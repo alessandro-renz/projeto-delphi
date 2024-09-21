@@ -9,7 +9,7 @@ uses
   FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
   FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Comp.Client,
   Vcl.DBCtrls, Vcl.Grids, Vcl.DBGrids, Vcl.StdCtrls, Vcl.Buttons, Vcl.Mask,
-  Vcl.ExtCtrls, Vcl.ComCtrls, RxToolEdit, RxCurrEdit, uEnum, cProduto, uDtmConexao,
+  Vcl.ExtCtrls, Vcl.ComCtrls, RxToolEdit, RxCurrEdit, uEnum, cProduto, uDtmConexao, cEstoque,
   Datasnap.DBClient;
 
 type
@@ -24,22 +24,27 @@ type
     dtsCategoria: TDataSource;
     qryCategoriaCATEGORIAID: TIntegerField;
     qryCategoriaDESCRICAO: TStringField;
-    edtQuantidade: TCurrencyEdit;
-    Label3: TLabel;
     edtDescricao: TMemo;
     Label4: TLabel;
     qryListagemPRODUTOID: TIntegerField;
     qryListagemNOME: TStringField;
     qryListagemDESCRICAO: TStringField;
     qryListagemVALOR: TFMTBCDField;
-    qryListagemQUANTIDADE: TFMTBCDField;
     qryListagemCATEGORIA: TStringField;
+    tabEstoque: TTabSheet;
+    Label3: TLabel;
+    Label6: TLabel;
+    edtQuantidade: TCurrencyEdit;
+    Label7: TLabel;
+    edtQuantidadeMinima: TCurrencyEdit;
+    Label8: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure btnAlterarClick(Sender: TObject);
   private
     { Private declarations }
     oProduto: TProduto;
+    oEstoque: TEstoque;
   public
     { Public declarations }
     function Gravar(estado: TEstadoCadastro): boolean;override;
@@ -56,6 +61,7 @@ procedure TfrmCadProduto.FormCreate(Sender: TObject);
 begin
   inherited;
   oProduto := TProduto.Create(dtmConexao.FDConnection);
+  oEstoque := TEstoque.Create(dtmConexao.FDConnection);
   IndiceAtual := 'NOME';
 end;
 
@@ -68,6 +74,9 @@ end;
 
 
 function TfrmCadProduto.Gravar(estado: TEstadoCadastro): boolean;
+var
+  msgConfirmation: TModalResult;
+  textMsg: string;
 begin
   if edtCodigo.Text <> EmptyStr then
      oProduto.Codigo := strToInt(edtCodigo.Text);
@@ -75,15 +84,23 @@ begin
   oProduto.Nome := edtNome.Text;
   oProduto.Descricao := edtDescricao.Text;
   oProduto.Valor := strToFloat(edtValor.Text);
-  oProduto.Quantidade := strToFloat(edtQuantidade.Text);
   oProduto.CategoriaId := strToInt(lkpCategoria.KeyValue);
-
   if (estado = ecInserir) AND (oProduto.Inserir) then
-     ShowMessage('Produto adicionado com sucesso!')
+  begin
+    oEstoque.ProdutoID := oProduto.LastId;
+    oEstoque.Quantidade := edtQuantidade.Value;
+    oEstoque.QuantidadeMinima := edtQuantidadeMinima.Value;
+    oEstoque.Inserir;
+    ShowMessage('Produto adicionado com sucesso!');
+  end
   else if (estado = ecAlterar) AND (oProduto.Atualizar) then
+  begin
     ShowMessage('Produto atualizado com sucesso!');
-
+  end
+  else
+    ShowMessage('Ocorreu um erro pra salvar/atualizar produto!');;
 end;
+
 
 procedure TfrmCadProduto.FormDestroy(Sender: TObject);
 begin

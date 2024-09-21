@@ -8,6 +8,7 @@ object dtmConexao: TdtmConexao
       'User_Name=sysdba'
       'Password=masterkey'
       'DriverID=FB')
+    Connected = True
     LoginPrompt = False
     Left = 64
     Top = 24
