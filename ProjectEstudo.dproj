@@ -125,6 +125,30 @@
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="classes\cCliente.pas"/>
+        <DCCReference Include="cadastros\uCadProduto.pas">
+            <Form>frmCadProduto</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="classes\cProduto.pas"/>
+        <DCCReference Include="datamodule\uDtmVenda.pas">
+            <Form>dtmVenda</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
+        <DCCReference Include="cadastros\uCadVenda.pas">
+            <Form>frmCadVenda</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="classes\cVenda.pas"/>
+        <DCCReference Include="Relatórios\uRelCategoria.pas">
+            <Form>frmRelCategoria</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="cadastros\uCadEstoque.pas">
+            <Form>frmCadEstoque</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="classes\cEstoque.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

@@ -11,6 +11,7 @@ object frmPrincipal: TfrmPrincipal
   Font.Name = 'Segoe UI'
   Font.Style = []
   Menu = MainPrincipal
+  OnShow = FormShow
   TextHeight = 15
   object MainPrincipal: TMainMenu
     Left = 752
@@ -44,6 +45,11 @@ object frmPrincipal: TfrmPrincipal
       Caption = 'MOVIMENTA'#199#195'O'
       object VENDA1: TMenuItem
         Caption = 'VENDA'
+        OnClick = VENDA1Click
+      end
+      object ESTOQUE: TMenuItem
+        Caption = 'ESTOQUE'
+        OnClick = ESTOQUEClick
       end
     end
     object RELATRIOS1: TMenuItem
@@ -62,6 +68,10 @@ object frmPrincipal: TfrmPrincipal
       end
       object VENDAPORDATA1: TMenuItem
         Caption = 'VENDA POR DATA'
+      end
+      object Categoria2: TMenuItem
+        Caption = 'CATEGORIA'
+        OnClick = Categoria2Click
       end
     end
   end
