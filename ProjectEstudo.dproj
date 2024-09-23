@@ -149,6 +149,7 @@
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="classes\cEstoque.pas"/>
+        <DCCReference Include="classes\cDB.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

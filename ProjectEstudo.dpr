@@ -17,7 +17,8 @@ uses
   cVenda in 'classes\cVenda.pas',
   uRelCategoria in 'Relatórios\uRelCategoria.pas' {frmRelCategoria},
   uCadEstoque in 'cadastros\uCadEstoque.pas' {frmCadEstoque},
-  cEstoque in 'classes\cEstoque.pas';
+  cEstoque in 'classes\cEstoque.pas',
+  cDB in 'classes\cDB.pas';
 
 {$R *.res}
 
