@@ -19,7 +19,6 @@ Type TApi = class
       HttpClient: TNetHTTPClient;
       httpResponse: IHTTPResponse;
       FResponse: TJSONObject;
-    
     published
       property Status: integer read FStatus write FStatus;
       property Response: TJSONObject read FResponse write FResponse;
@@ -35,6 +34,7 @@ begin
   HttpClient := TNetHTTPClient.Create(nil);
   HttpClient.ContentType := 'application/json';
   HttpClient.Accept := 'application/json';
+
 end;
 
 
@@ -45,6 +45,11 @@ begin
   try
     httpResponse := HttpClient.Get(Url);
     FResponse := TJSONObject.ParseJSONValue(httpResponse.ContentAsString) as TJSONObject;
+    if FResponse = nil then
+    begin
+      Result := False;
+      Exit;
+    end;
     Result := True;
   except
     on e: Exception do
@@ -64,17 +69,28 @@ end;
 
 
 function TApi.Post(endpoint: string; body: TJSONObject): boolean;
+var
+  stream: TStringStream;
 begin
   Url := Url + endpoint;
 
   try
-    httpResponse := HttpClient.Post(Url, body.ToString);
+    stream := TStringStream.Create(body.ToString);
+    httpResponse := HttpClient.Post(Url, stream);
     FResponse :=  TJSONObject.ParseJSONValue(httpResponse.ContentAsString) as TJSONObject;
+    if FResponse = nil then
+    begin
+      Result := False;
+      Exit;
+    end;
+
     Result := True;
   except on e: Exception do
   begin
     FResponse := TJSONObject.ParseJSONValue('{error: '+e.Message+'}') as TJSONObject;
+    stream.Free;
     Result := False;
+
   end;
 
   end;
@@ -82,19 +98,30 @@ end;
 
 
 function TApi.Put(endpoint: string; body: TJSONObject): boolean;
+var
+  stream: TStringStream;
 begin
   Url := Url + endpoint;
 
   try
-    HttpResponse := HttpClient.Put(Url, body.ToString);  
-    FResponse := TJSONObject.ParseJSONValue(httpResponse.ContentAsString) as TJSONObject;
+    stream := TStringStream.Create(body.ToString);
+    httpResponse := HttpClient.Put(Url, stream);
+    FResponse :=  TJSONObject.ParseJSONValue(httpResponse.ContentAsString) as TJSONObject;
+    if FResponse = nil then
+    begin
+      Result := False;
+      Exit;
+    end;
+
     Result := True;
   except on e: Exception do
   begin
     FResponse := TJSONObject.ParseJSONValue('{error: '+e.Message+'}') as TJSONObject;
+    stream.Free;
     Result := False;
+
   end;
-  
+
   end;
 end;
 
@@ -107,6 +134,12 @@ begin
     httpResponse := HttpClient.Delete(Url);
     httpResponse.ContentAsString;
     FResponse := TJSONObject.ParseJSONValue(httpResponse.ContentAsString) as TJSONObject;
+    if FResponse = nil then
+    begin
+      Result := False;
+      Exit;
+    end;
+
     Result := True;
   except
     on e: Exception do
