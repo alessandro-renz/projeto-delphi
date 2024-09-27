@@ -18,7 +18,8 @@ uses
   uRelCategoria in 'Relatórios\uRelCategoria.pas' {frmRelCategoria},
   uCadEstoque in 'cadastros\uCadEstoque.pas' {frmCadEstoque},
   cEstoque in 'classes\cEstoque.pas',
-  cDB in 'classes\cDB.pas';
+  cDB in 'classes\cDB.pas',
+  uApi in 'uApi.pas';
 
 {$R *.res}
 

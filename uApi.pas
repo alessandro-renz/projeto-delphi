@@ -19,6 +19,7 @@ Type TApi = class
       HttpClient: TNetHTTPClient;
       httpResponse: IHTTPResponse;
       FResponse: TJSONObject;
+    
     published
       property Status: integer read FStatus write FStatus;
       property Response: TJSONObject read FResponse write FResponse;
@@ -83,6 +84,18 @@ end;
 function TApi.Put(endpoint: string; body: TJSONObject): boolean;
 begin
   Url := Url + endpoint;
+
+  try
+    HttpResponse := HttpClient.Put(Url, body.ToString);  
+    FResponse := TJSONObject.ParseJSONValue(httpResponse.ContentAsString) as TJSONObject;
+    Result := True;
+  except on e: Exception do
+  begin
+    FResponse := TJSONObject.ParseJSONValue('{error: '+e.Message+'}') as TJSONObject;
+    Result := False;
+  end;
+  
+  end;
 end;
 
 

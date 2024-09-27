@@ -150,6 +150,7 @@
         </DCCReference>
         <DCCReference Include="classes\cEstoque.pas"/>
         <DCCReference Include="classes\cDB.pas"/>
+        <DCCReference Include="uApi.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
