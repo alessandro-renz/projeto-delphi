@@ -19,7 +19,9 @@ uses
   uCadEstoque in 'cadastros\uCadEstoque.pas' {frmCadEstoque},
   cEstoque in 'classes\cEstoque.pas',
   uRelatorioBase in 'heranca\uRelatorioBase.pas' {frmRelatorioBase},
-  uRelEstoqueBaixo in 'Relatórios\uRelEstoqueBaixo.pas' {frmRelEstoqueBaixo};
+  uRelEstoqueBaixo in 'Relatórios\uRelEstoqueBaixo.pas' {frmRelEstoqueBaixo},
+  uApi in 'uApi.pas',
+  uLogin in 'uLogin.pas' {frmLogin};
 
 {$R *.res}
 
@@ -27,6 +29,7 @@ begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TdtmConexao, dtmConexao);
+  Application.CreateForm(TfrmLogin, frmLogin);
   Application.CreateForm(TdtmVenda, dtmVenda);
   Application.CreateForm(TfrmPrincipal, frmPrincipal);
   Application.CreateForm(TfrmRelCategoria, frmRelCategoria);

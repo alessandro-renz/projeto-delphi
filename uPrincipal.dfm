@@ -11,6 +11,7 @@ object frmPrincipal: TfrmPrincipal
   Font.Name = 'Segoe UI'
   Font.Style = []
   Menu = MainPrincipal
+  Position = poScreenCenter
   OnShow = FormShow
   TextHeight = 15
   object MainPrincipal: TMainMenu
