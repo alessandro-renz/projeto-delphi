@@ -17,7 +17,9 @@ uses
   cVenda in 'classes\cVenda.pas',
   uRelCategoria in 'Relatórios\uRelCategoria.pas' {frmRelCategoria},
   uCadEstoque in 'cadastros\uCadEstoque.pas' {frmCadEstoque},
-  cEstoque in 'classes\cEstoque.pas';
+  cEstoque in 'classes\cEstoque.pas',
+  uRelatorioBase in 'heranca\uRelatorioBase.pas' {frmRelatorioBase},
+  uRelEstoqueBaixo in 'Relatórios\uRelEstoqueBaixo.pas' {frmRelEstoqueBaixo};
 
 {$R *.res}
 
@@ -29,5 +31,7 @@ begin
   Application.CreateForm(TfrmPrincipal, frmPrincipal);
   Application.CreateForm(TfrmRelCategoria, frmRelCategoria);
   Application.CreateForm(TfrmCadEstoque, frmCadEstoque);
+  Application.CreateForm(TfrmRelatorioBase, frmRelatorioBase);
+  Application.CreateForm(TfrmRelEstoqueBaixo, frmRelEstoqueBaixo);
   Application.Run;
 end.

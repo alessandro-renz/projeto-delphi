@@ -7,7 +7,8 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, RLReport, FireDAC.Stan.Intf,
   FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
   FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
-  Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client, uDtmConexao;
+  Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client, uDtmConexao,
+  Vcl.Imaging.pngimage;
 
 type
   TfrmRelatorioBase = class(TForm)
@@ -29,6 +30,7 @@ type
     RLDraw2: TRLDraw;
     RLSystemInfo1: TRLSystemInfo;
     RLSystemInfo2: TRLSystemInfo;
+    RLImage1: TRLImage;
   private
     { Private declarations }
   public

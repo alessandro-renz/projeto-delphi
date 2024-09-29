@@ -149,6 +149,14 @@
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="classes\cEstoque.pas"/>
+        <DCCReference Include="heranca\uRelatorioBase.pas">
+            <Form>frmRelatorioBase</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Relatórios\uRelEstoqueBaixo.pas">
+            <Form>frmRelEstoqueBaixo</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
