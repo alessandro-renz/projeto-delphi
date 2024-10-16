@@ -57,7 +57,7 @@ begin
     writeLn('Arquivo configurações db não encontrado');
     Abort;
   end;
-  
+
   try
     fileIni := TIniFile.Create(filename);
     driverName := fileIni.ReadString('conexao', 'DriverName', '');
@@ -106,18 +106,17 @@ begin
   FQuery.Close;
   FQuery.SQL.Clear;
   FQuery.SQL.Text := sql;
-  oJson := TJsonObject.Create;
   FJsonArray := TJsonArray.Create;
   try
     FQuery.Open;
     FQuery.First;
     while not FQuery.Eof do
     begin
+      oJson := TJsonObject.Create;
       for var I := 0 to FQuery.FieldCount - 1 do
       begin
         oJson.AddPair(FQuery.Fields[I].FieldName, FQuery.Fields[I].AsString);
       end;
-
       FJsonArray.AddElement(oJson);
       FQuery.Next;
     end;
@@ -129,8 +128,8 @@ begin
         FQuery.Close;
         FQuery.Free;
     end;
-      
-  end;  
+
+  end;
 end;
 
 
