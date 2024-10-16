@@ -21,7 +21,9 @@ uses
   uRelatorioBase in 'heranca\uRelatorioBase.pas' {frmRelatorioBase},
   uRelEstoqueBaixo in 'Relatórios\uRelEstoqueBaixo.pas' {frmRelEstoqueBaixo},
   uApi in 'uApi.pas',
-  uLogin in 'uLogin.pas' {frmLogin};
+  uLogin in 'uLogin.pas' {frmLogin},
+  uConfig in 'api\uConfig.pas',
+  uController in 'api\controllers\uController.pas';
 
 {$R *.res}
 

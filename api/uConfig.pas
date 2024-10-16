@@ -20,16 +20,19 @@ Type TConfig = class
       oJson: TJsonObject;
       fdConnect: TFDConnection;
       FQuery: TFDQuery;
+      FJsonArray: TJsonArray;
       procedure LoadFileDB;
       procedure ConnectDB;
       procedure SetSql(sql: string);
+      function GetJson: string;
     public
       constructor Create;
       destructor Destroy;override;
     published
       property Sql: string write SetSql;
-      property Query: TFDQuery read FQuery;   
-         
+      property Query: TFDQuery read FQuery;
+      property Json: string read GetJson;
+
 end;
 
 implementation
@@ -70,6 +73,11 @@ begin
 end;
 
 
+function TConfig.GetJson: string;
+begin
+  Result := FJsonArray.ToJSON;
+end;
+
 procedure TConfig.ConnectDB;
 begin
     try
@@ -90,14 +98,30 @@ end;
 
 
 procedure TConfig.SetSql(sql: string);
+var
+  oJson: TJsonObject;
 begin
   FQuery := TFDQuery.Create(nil);
   FQuery.Connection := fdConnect;
+  FQuery.Close;
   FQuery.SQL.Clear;
   FQuery.SQL.Text := sql;
-
+  oJson := TJsonObject.Create;
+  FJsonArray := TJsonArray.Create;
   try
-    FQuery.Open;    
+    FQuery.Open;
+    FQuery.First;
+    while not FQuery.Eof do
+    begin
+      for var I := 0 to FQuery.FieldCount - 1 do
+      begin
+        oJson.AddPair(FQuery.Fields[I].FieldName, FQuery.Fields[I].AsString);
+      end;
+
+      FJsonArray.AddElement(oJson);
+      FQuery.Next;
+    end;
+
   except
     on E:Exception do
     begin
