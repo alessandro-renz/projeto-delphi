@@ -4,11 +4,11 @@ object dtmConexao: TdtmConexao
   object FDConnection: TFDConnection
     ConnectionName = 'connectFD'
     Params.Strings = (
-      'Database=C:\Users\sandr\Documents\BD Firebird\DADOS.FDB'
-      'User_Name=sysdba'
-      'Password=masterkey'
-      'DriverID=FB')
-    Connected = True
+      'Database=ESTOQUE'
+      'User_Name=SA'
+      'Password=SenhaSegura@123'
+      'Server=localhost, 1431'
+      'DriverID=MSSQL')
     LoginPrompt = False
     Left = 64
     Top = 24
