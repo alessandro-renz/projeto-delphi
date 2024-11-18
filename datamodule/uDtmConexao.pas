@@ -12,6 +12,7 @@ uses
 type
   TdtmConexao = class(TDataModule)
     FDConnection: TFDConnection;
+    FDPhysMSSQLDriverLink: TFDPhysMSSQLDriverLink;
   private
     { Private declarations }
   public
@@ -120,6 +121,7 @@ procedure TdtmConexao.ExecQuery(sql: string);
 var
   query: TFDquery;
 begin
+  FDPhysMSSQLDriverLink := TFDPhysMSSQLDriverLink.Create(nil);
   if FDConnection.InTransaction then
      FDConnection.Commit;
 

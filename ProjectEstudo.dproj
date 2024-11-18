@@ -87,7 +87,7 @@
         <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Locale>1033</VerInfo_Locale>
-        <DCC_UnitSearchPath>C:\git\projeto-delphi\api\horse-3.1.6\src;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
+        <DCC_UnitSearchPath>C:\git\projeto-delphi\api\horse-3.1.6\src;C:\git\projeto-delphi\RXLibrary\units;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
@@ -165,6 +165,7 @@
         </DCCReference>
         <DCCReference Include="api\uConfig.pas"/>
         <DCCReference Include="api\controllers\uController.pas"/>
+        <DCCReference Include="datamodule\uCreateTables.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

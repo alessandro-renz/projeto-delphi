@@ -23,7 +23,8 @@ uses
   uApi in 'uApi.pas',
   uLogin in 'uLogin.pas' {frmLogin},
   uConfig in 'api\uConfig.pas',
-  uController in 'api\controllers\uController.pas';
+  uController in 'api\controllers\uController.pas',
+  uCreateTables in 'datamodule\uCreateTables.pas';
 
 {$R *.res}
 
